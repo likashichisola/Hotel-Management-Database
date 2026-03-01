@@ -1,0 +1,118 @@
+CREATE TABLE `Manager` (
+  `ManagerID` nvarchar,
+  `FirstName` nvarchar,
+  `lastName` nvarchar,
+  `PhoneNumber` int,
+  PRIMARY KEY (`ManagerID`),
+  KEY `Key` (`FirstName`, `lastName`, `PhoneNumber`)
+);
+
+CREATE TABLE `Branch` (
+  `BranchID` nvarchar,
+  ` Branch` nvarchar,
+  PRIMARY KEY (`BranchID`),
+  KEY `Key` (` Branch`)
+);
+
+CREATE TABLE `Customer` (
+  `RegistrationID` nvarchar,
+  `FirstName` nvarchar,
+  `LastName` nvarchar,
+  `PhoneNumber` int,
+  `MailingID` nvarchar,
+  PRIMARY KEY (`RegistrationID`),
+  KEY `Key` (`FirstName`, `LastName`, `PhoneNumber`)
+);
+
+CREATE TABLE `CustomerMailingAddress` (
+  `MailingID` nvarchar,
+  `StreetZIP` nvarchar,
+  `City` nvarchar,
+  `State` nvarchar,
+  `Country` nvarchar,
+  PRIMARY KEY (`MailingID`),
+  KEY `Key` (`StreetZIP`, `City`, `State`, `Country`)
+);
+
+CREATE TABLE `Room` (
+  `RoomID` nvarchar,
+  `RoomType` nvarchar,
+  `Capacity` int,
+  `Location` nvarchar,
+  PRIMARY KEY (`RoomID`),
+  KEY `Key` (`Capacity`, `Location`)
+);
+
+CREATE TABLE `RoomCapacity` (
+  `RoomType` nvarchar,
+  `RoomOccupancy` Type,
+  PRIMARY KEY (`RoomType`),
+  KEY `Key` (`RoomOccupancy`)
+);
+
+CREATE TABLE `RoomDetails` (
+  `RoomID` nvarchar,
+  `RoomType` nvarchar,
+  `Branch` nvarchar,
+  PRIMARY KEY (`RoomID`)
+);
+
+CREATE TABLE `Reservation` (
+  `ReservationID` nvarchar,
+  `RegistrationID` nvarchar,
+  `BranchID` nvarchar,
+  `Check-in` nvarchar,
+  `Check-out` nvarchar,
+  `PreferenceNo` nvarchar,
+  PRIMARY KEY (`ReservationID`),
+  KEY `Key` (`Check-in`, `Check-out`)
+);
+
+CREATE TABLE `RegistrationRoom` (
+  `RoomID` nvarchar,
+  `ReservationID` nvarchar,
+  PRIMARY KEY (`RoomID`),
+  FOREIGN KEY (`RoomID`) REFERENCES `Reservation`(`BranchID`)
+);
+
+CREATE TABLE `Invoice` (
+  `InvoiceNo` nvarchar,
+  `ReservationID` nvarchar,
+  `Price` int,
+  PRIMARY KEY (`InvoiceNo`)
+);
+
+CREATE TABLE `Price` (
+  `Price` int,
+  `Duration` int,
+  `RoomType` nvarchar,
+  PRIMARY KEY (`Price`),
+  KEY `Key` (`Duration`)
+);
+
+CREATE TABLE `RatingList` (
+  `RatingScale` int,
+  `Rating` nvarchar,
+  PRIMARY KEY (`RatingScale`),
+  KEY `Key` (`Rating`)
+);
+
+CREATE TABLE `ReservationRating` (
+  `ReservationID` nvarchar,
+  `Email` nvarchar,
+  `RatingScale` int,
+  PRIMARY KEY (`ReservationID`)
+);
+
+CREATE TABLE `Registration` (
+  `RegistrationID` Type,
+  `Email` Type,
+  PRIMARY KEY (`RegistrationID`, `Email`)
+);
+
+CREATE TABLE `ManagerBranch` (
+  `ManagerID` nvarchar,
+  `BranchID` nvarchar,
+  PRIMARY KEY (`ManagerID`, `BranchID`)
+);
+
